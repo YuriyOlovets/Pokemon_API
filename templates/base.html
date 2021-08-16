@@ -1,0 +1,21 @@
+{% load static%}
+<!DOCTYPE html><html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <link href="{% static "css/table.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <a href="{%url 'pokemon'%}"><span class="logo">Pokeapi</span></a>
+        <a class="myButton" href="{%url 'my_pokemons'%}">My pokemons</a>
+        <a class="myButton" href="{%url 'players'%}">Player list</a>
+    </div>
+
+    <div id="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+
+</html>

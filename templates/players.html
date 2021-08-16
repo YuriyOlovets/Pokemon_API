@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{%block content%}
+<h1>Players list</h1>
+<table class="styled-table">
+    <thead >
+    <tr>
+      <th>Username</th>
+      <th>Pokemons</th>
+    </tr>
+    </thead>
+    <tbody> {%for player in players%}
+    <tr class="active-row">
+
+      <td>{{player.username}}</td>
+      <td> {% for pokemon in player.pokemons_set.all %}
+          {{pokemon.name}},
+      {%endfor%}
+      </td>
+    </tr>{%endfor%}
+    </tbody>
+  </table>
+<div class="grid-img-right mt-4 text-right bg bg1" >
+            {% include 'pagination.html' %}
+        </div>
+{%endblock%}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{%block content%}
+<table class="styled-table">
+    <thead >
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Experience</th>
+        <th>Weight</th>
+        <th>Height</th>
+    </tr>
+    </thead>
+    <tbody> {%for pokemon in pokemon_list%}
+    <tr class="active-row">
+
+      <td>{{pokemon.pokemon_id}}</td>
+      <td>{{pokemon.name}}</td>
+        <td>{{pokemon.experience}}</td>
+        <td>{{pokemon.weight}}</td>
+        <td>{{pokemon.height}}</td>
+        <td><a class="myButton" href="{%url 'tame' pokemon.pokemon_id%}">tame</a></td>
+
+    </tr>{%endfor%}
+    </tbody>
+  </table>
+<div class="grid-img-right mt-4 text-right bg bg1" >
+            {% include 'pagination.html' %}
+        </div>
+{%endblock%}

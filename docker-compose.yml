@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  dm_db:
+    image: postgres:12
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: poke
+      POSTGRES_PASSWORD: poke
+      POSTGRES_DB: poke_db
+  dm_web:
+    container_name: pokemon
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "python /usr/src/pokemon/manage.py migrate &&
+      python /usr/src/pokemon/manage.py makemigrations pokemon &&
+      python /usr/src/pokemon/manage.py migrate pokemon &&
+      python /usr/src/pokemon/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/pokemon
+    ports:
+      - 8000:8000
+    depends_on:
+      - dm_db
+
+volumes:
+  pg_data:
